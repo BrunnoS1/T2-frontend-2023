@@ -8,9 +8,6 @@ const rl = readline.createInterface({
 
 const axios = require("axios");
 
-require('dotenv').config();
-// usar .env pra deixar a minha chave api fora do codigo
-
 const units = "metric";
 // unidade de medida
 const lang = "pt_BR";
@@ -18,13 +15,13 @@ const lang = "pt_BR";
 const limit = "1";
 // limitar a 1 cidade na busca
 
-// appid = "ef0b0973b783e0614ac87612ec04344b"       // comentado pois foi feito com .env para teste
+appid = "ef0b0973b783e0614ac87612ec04344b"
 
 
 rl.question('Digite uma cidade: ', function(q) {
     console.log(`cidade = ${q}`);
     // buscar latitude e longitude da cidade
-    const url_latlon = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&limit=${limit}&appid=${process.env.appid}`
+    const url_latlon = `http://api.openweathermap.org/geo/1.0/direct?q=${q}&limit=${limit}&appid=${appid}`
 
     axios
         .get(url_latlon)
@@ -36,7 +33,7 @@ rl.question('Digite uma cidade: ', function(q) {
             const lat = data.lat;
             const lon = data.lon;
             // buscar o clima da latitude/longitude
-            const url_clima = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${process.env.appid}&lang=${lang}`
+            const url_clima = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${appid}&lang=${lang}`
 
             axios
             .get(url_clima)
